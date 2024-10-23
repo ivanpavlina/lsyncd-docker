@@ -1,7 +1,8 @@
 # lsyncd-docker
 
-# Config example
+### Config example
 
+```
 services:
   app:
     image: exithub/lsyncd-docker:latest
@@ -10,3 +11,4 @@ services:
     volumes:
       - /data/lsyncd_test/source1:/source
       - /data/lsyncd_test/output1:/destination
+```
