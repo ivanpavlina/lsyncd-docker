@@ -59,4 +59,12 @@ echo "---"
 cat /etc/lsyncd.conf
 echo "---"
 
+# Check if RESTART_CRON is set
+if [ -n "$RESTART_CRON" ]; then
+  echo "$RESTART_CRON /usr/bin/killall -s SIGTERM lsyncd; /usr/bin/killall -s SIGTERM rsync;" >> /etc/crontabs/root
+  echo "* * * * * /bin/echo 'radim';" >> /etc/crontabs/root
+  echo "Scheduled cron restart $RESTART_CRON"
+fi
+
+/usr/sbin/crond > /dev/stdout 2> /dev/stderr;
 exec /usr/bin/lsyncd -nodaemon /etc/lsyncd.conf
